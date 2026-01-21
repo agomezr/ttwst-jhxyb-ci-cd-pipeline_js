@@ -166,7 +166,16 @@ kubectl port-forward service/el-cd-listener  8090:8080
 
 ### Trigger event listener
 
-Use the curl command to send a payload to the event listener service.
+Use the curl command to send a payload (JSON) to the event listener service.
+
+```js
+{
+  "ref": "main",
+  "repository": {
+    "url": "https://github.com/ibm-developer-skills-network/ttwst-jhxyb-ci-cd-pipeline_js"
+  }  
+}
+```
 
 ```sh
 curl -X POST http://localhost:8090 \
