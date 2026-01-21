@@ -24,7 +24,7 @@ kubectl apply -f tasks.yaml
 kubectl apply -f pipeline.yaml
 ```
 
-Check everything its ok
+Check everything is ok
 
 ```sh
 tkn task ls
@@ -50,6 +50,8 @@ spec:
       template:
         ref: cd-template
 ```
+
+The serviceAccountName is a “user/role” for kubernetes clúster. If not exists or does not have the permissions (RBAC) a forbidden (403) will be set in the logs.
 
 Apply the EventListener resource to the cluster:
 
@@ -133,7 +135,7 @@ spec:
             value: $(tt.params.branch)
 ```
 
-Note that while the parameter you bound from the event is a repository, you pass it on as repo-url to the pipeline. This is to show that the names do not have to match, allowing you to use any pipeline to map parameters into.
+Note that while the parameter you bound from the event is a repository, you pass it on as repo-url to the pipeline. This is to show that the names do not have to match, allowing you to use any pipeline to map parameters into. The `tt.params.<something>` is for TriggerTemplate params.
 
 Apply the new TriggerTemplate definition to the cluster:
 
