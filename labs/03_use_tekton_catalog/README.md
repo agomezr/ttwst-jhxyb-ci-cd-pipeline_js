@@ -142,6 +142,6 @@ cd-pipeline-run-62q4r   1 minute ago   32s
 
 You can check the logs of the last run with:
 
-```console
-$ tkn pipelinerun logs --last
+```sh
+tkn pipelinerun logs --last
 ```
