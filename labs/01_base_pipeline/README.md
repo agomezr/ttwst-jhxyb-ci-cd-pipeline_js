@@ -23,6 +23,13 @@ Apply it to the Kubernetes cluster
 kubectl apply -f tasks.yaml
 ```
 
+Chek that the task were created
+
+```sh
+kubectl get tasks  # Kubernetes native command to list
+tkn task ls # Tekton CLI command to list
+```
+
 Create a hello-pipeline pipeline
 
 ```yaml
@@ -43,11 +50,10 @@ Apply it to the Kubernetes cluster, every time the file update an apply must be 
 kubectl apply -f pipeline.yaml
 ```
 
-Chek that the task were created
+Chek that the pipeline were created
 
 ```sh
-kubectl get tasks  # Kubernetes native command to list
-tkn task ls # Tekton CLI command to list
+tkn pipeline ls # Tekton CLI command to list
 ```
 
 Run the pipeline using the Tekton CLI
@@ -250,16 +256,12 @@ Waiting for logs to be available...
 
 Create a pipeline task for each of these:
 
-### Revisar
-```mdx
-| Task name |	Build | after	| Message |
-| --- | --- | --- | --- |
-| checkout | | | Cloning into… |
+| Task name |	Build after	| Message |
+| --- | --- | --- |
 | lint	| clone |	Calling ESLint linter… |
-| tests |	lint	| Running unit tests with Jest…
-build	tests	Building image for $(params.repo-url) …
-deploy	build	Deploying $(params.branch) branch of $(params.repo-url) …
-```
+| tests |	lint	| Running unit tests with Jest… |
+| build	| tests	| Building image for $(params.repo-url) … |
+| deploy	| build	| Deploying $(params.branch) branch of $(params.repo-url) … |
 
 The code of the pipeline.yaml
 
