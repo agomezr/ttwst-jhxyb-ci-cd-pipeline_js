@@ -1,6 +1,6 @@
 apiVersion: tekton.dev/v1beta1
 kind: Pipeline
-metadata:  
+metadata:
   name: cd-pipeline
 spec:
   workspaces:
@@ -13,14 +13,14 @@ spec:
     - name: init
       workspaces:
         - name: source
-          workspace: pipeline-workspace          
+          workspace: pipeline-workspace
       taskRef:
         name: cleanup
 
     - name: clone
       workspaces:
         - name: output
-          workspace: pipeline-workspace          
+          workspace: pipeline-workspace
       taskRef:
         name: git-clone
       params:
@@ -29,7 +29,7 @@ spec:
       - name: revision
         value: $(params.branch)
       runAfter:
-        - init      
+        - init
 
     - name: lint
       workspaces:
@@ -56,7 +56,7 @@ spec:
       - name: args
         value: "--verbose --coverage"
       runAfter:
-        - lint
+        - clone
 
     - name: build
       taskRef:
@@ -65,6 +65,7 @@ spec:
       - name: message
         value: "Building image for $(params.repo-url) ..."
       runAfter:
+        - lint
         - tests
 
     - name: deploy

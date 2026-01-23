@@ -7,6 +7,7 @@ git clone https://github.com/agomezr/ttwst-jhxyb-ci-cd-pipeline_js.git
 ```
 
 Change directory
+
 ```sh
 cd ttwst-jhxyb-ci-cd-pipeline_js/labs/03_use_tekton_catalog/
 ```
