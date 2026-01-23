@@ -58,7 +58,7 @@ spec:
       - name: args
         value: "--verbose --coverage"
       runAfter:
-        - lint
+        - clone
 
     - name: build
       workspaces:
@@ -72,6 +72,7 @@ spec:
         value: "$(params.build-image)"
       runAfter:
         - tests
+        - lint
 
     - name: deploy
       taskRef:
