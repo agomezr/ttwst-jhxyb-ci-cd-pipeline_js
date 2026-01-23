@@ -32,20 +32,28 @@ spec:
         - init      
 
     - name: lint
+      workspaces:
+        - name: source
+          workspace: pipeline-workspace
       taskRef:
-        name: echo
+        name: eslint
       params:
-      - name: message
-        value: "Calling ESLint linter..."
+      - name: image
+        value: "node:18-alpine"
+      - name: args
+        value: ["--format", "stylish", "--ext", ".js", "."]
       runAfter:
         - clone
 
     - name: tests
+      workspaces:
+        - name: source
+          workspace: pipeline-workspace
       taskRef:
-        name: echo
+        name: jest
       params:
-      - name: message
-        value: "Running unit tests with Jest..."
+      - name: args
+        value: "--verbose --coverage"
       runAfter:
         - lint
 
